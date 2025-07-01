@@ -42,7 +42,7 @@ async function _createPost(formData: FormData) {
   redirect("/");
 }
 
-export function PostPage() {
+function PostPage() {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-amber-100">
       <Link
