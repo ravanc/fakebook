@@ -1,5 +1,6 @@
 import "dotenv/config";
 // import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle } from "drizzle-orm/neon-http";
 import {
   sql as sqlDrizzle,
   eq,
@@ -12,23 +13,18 @@ import {
 } from "drizzle-orm";
 import * as schema from "./schema";
 
+import { neon, neonConfig } from "@neondatabase/serverless";
 import { faker } from "@faker-js/faker";
-import { getAsset } from "node:sea";
+
+import ws from "ws";
+neonConfig.webSocketConstructor = ws;
 
 // export const db = drizzle(process.env.DATABASE_URL!, {
 //   schema: schema,
 //   logger: false,
 // });
 
-import { drizzle } from "drizzle-orm/neon-http";
-
-import { neon } from "@neondatabase/serverless";
-
-import { config } from "dotenv";
-
-config({ path: ".env" }); // or .env.local
-
-const sql = neon(process.env.DATABASE_URL!);
+const sql = neon(process.env.POSTGRES_URL!);
 export const db = drizzle({ client: sql });
 
 /*
