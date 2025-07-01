@@ -1,0 +1,1 @@
+CREATE TYPE "public"."friendState" AS ENUM('PENDING', 'FRIENDS', 'BLOCKED');

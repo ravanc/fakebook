@@ -1,0 +1,40 @@
+{
+  "name": "fakebook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db": "npx tsx ./lib/db/db.ts",
+    "db:push": "drizzle-kit push",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.11",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.44.2",
+    "drizzle-seed": "^0.3.1",
+    "next": "^15.3.4",
+    "pg": "^8.16.3",
+    "postcss": "^8.5.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "redis": "^5.5.6",
+    "tailwindcss": "^4.1.11",
+    "zod": "^3.25.67"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "@types/node": "^24.0.4",
+    "@types/pg": "^8.15.4",
+    "@types/react": "^19.1.8",
+    "drizzle-kit": "^0.31.2",
+    "tsx": "^4.20.3",
+    "typescript": "5.8.3"
+  }
+}
