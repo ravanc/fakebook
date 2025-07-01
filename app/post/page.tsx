@@ -12,7 +12,7 @@ import Image from "next/image";
 // using server action short circuits having to define /api/..., which should
 // mostly be used when you are trying to deal with external data
 
-export async function _createPost(formData: FormData) {
+async function _createPost(formData: FormData) {
   "use server";
   const text = formData.get("text");
 
@@ -42,12 +42,12 @@ export async function _createPost(formData: FormData) {
   redirect("/");
 }
 
-function PostPage() {
+export function PostPage() {
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-amber-100">
       <Link
         href={"/"}
-        className="absolute top-3 left-4 text-lg flex flex-row items-center gap-2"
+        className="absolute top-3 left-4 text-lg flex flex-row items-center gap-2 "
       >
         <Image src={"/back.svg"} alt="back" height={24} width={24} />
         Back
