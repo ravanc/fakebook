@@ -11,3 +11,6 @@ logs
 yarn-error.log
 npm-debug.log
 .env
+.vercel
+
+.env.development.local

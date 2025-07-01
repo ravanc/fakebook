@@ -1,15 +1,35 @@
 import "dotenv/config";
-import { drizzle } from "drizzle-orm/node-postgres";
-import { sql, eq, and, or, inArray, desc, notInArray, not } from "drizzle-orm";
+// import { drizzle } from "drizzle-orm/node-postgres";
+import {
+  sql as sqlDrizzle,
+  eq,
+  and,
+  or,
+  inArray,
+  desc,
+  notInArray,
+  not,
+} from "drizzle-orm";
 import * as schema from "./schema";
 
 import { faker } from "@faker-js/faker";
 import { getAsset } from "node:sea";
 
-export const db = drizzle(process.env.DATABASE_URL!, {
-  schema: schema,
-  logger: false,
-});
+// export const db = drizzle(process.env.DATABASE_URL!, {
+//   schema: schema,
+//   logger: false,
+// });
+
+import { drizzle } from "drizzle-orm/neon-http";
+
+import { neon } from "@neondatabase/serverless";
+
+import { config } from "dotenv";
+
+config({ path: ".env" }); // or .env.local
+
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle({ client: sql });
 
 /*
 
@@ -20,9 +40,9 @@ RANDOM GENERATOR FUNCTIONS
 */
 
 async function deleteAllTables() {
-  await db.execute(sql`drop schema if exists public cascade`);
-  await db.execute(sql`create schema public`);
-  await db.execute(sql`drop schema if exists drizzle cascade`);
+  await db.execute(sqlDrizzle`drop schema if exists public cascade`);
+  await db.execute(sqlDrizzle`create schema public`);
+  await db.execute(sqlDrizzle`drop schema if exists drizzle cascade`);
 }
 
 function createRandomUser() {
@@ -506,7 +526,7 @@ export async function getFriendSuggestions({ userId }: { userId: string }) {
         not(eq(schema.UsersTable.id, userId))
       )
     )
-    .orderBy(sql`RANDOM()`)
+    .orderBy(sqlDrizzle`RANDOM()`)
     .limit(5);
 }
 
